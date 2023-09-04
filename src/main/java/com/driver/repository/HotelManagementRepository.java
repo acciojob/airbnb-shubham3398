@@ -62,10 +62,9 @@ public class HotelManagementRepository {
     public int addARoom(Booking booking) {
         String hotelName = booking.getHotelName();
         int roomAvail = hotelDb.get(hotelName).getAvailableRooms();
-
-        if(roomAvail > 0 ){
+        int noOfRooms = booking.getNoOfRooms();
+        if(roomAvail >= noOfRooms){
             String uiid = String.valueOf(UUID.randomUUID());
-            int noOfRooms = booking.getNoOfRooms();
             int charges = hotelDb.get(hotelName).getPricePerNight();
 
             int amount = noOfRooms*charges;
