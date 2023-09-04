@@ -28,9 +28,9 @@ public class HotelManagementRepository {
     public String addHotel(Hotel hotel) {
         if(hotel != null && hotel.getHotelName() != null && !hotelDb.containsKey(hotel.getHotelName())){
             hotelDb.put(hotel.getHotelName(), hotel);
-            return "Hotel added Successfullly";
+            return "SUCCESS";
         }
-        return "Failure Occured";
+        return "FAILURE";
     }
 
     public int addUser(User user) {
@@ -72,6 +72,9 @@ public class HotelManagementRepository {
             booking.setAmountToBePaid(amount);
             booking.setBookingId(uiid);
             bookingDb.put(uiid, booking);
+
+            //update the roomAvailable of hotelDb
+            hotelDb.get(hotelName).setAvailableRooms(roomAvail-noOfRooms);
             return amount;
         }
         return -1;
